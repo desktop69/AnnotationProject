@@ -1,4 +1,5 @@
 export class Label {
-    name!: string;
-    color!: string;
+    id?: number;
+    labelName!: string;
+    labelColor!: string;
 }

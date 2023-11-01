@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ArticlesComponent } from './articles/articles.component';
 import { WordSelectorComponent } from './word-selector/word-selector.component';
+import { LabelComponent } from './components/label/label.component';
 
-const routes: Routes = [{ path: "", component: ArticlesComponent },
-{ path: "word", component: WordSelectorComponent }];
+const routes: Routes = [
+{ path: "word", component: WordSelectorComponent },
+{ path: "", component: LabelComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

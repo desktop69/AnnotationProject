@@ -1,0 +1,57 @@
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Add Label" icon="pi pi-plus" iconPos="right" (click)="openAddModal()"> </p-button>
+        </ng-template>
+        <div class="p-2 ">
+            <h3><b>Manage labels</b></h3>
+        </div>
+    </p-toolbar>
+
+    <p-table #dt [value]="labels" [rows]="10" [paginator]="true" [globalFilterFields]="['labelName', ]"
+        [rowHover]="true" dataKey="_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h4 class="p-m-0"><b>List Labels</b></h4>
+                <span class="p-input-icon-left mt-3">
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Global Search" />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name">Label Name <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="name">Label color <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="delete">Delete</th>
+                <th pSortableColumn="update">Update</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-labels>
+            <tr>
+                <td>{{labels.labelName}}</td>
+                <td>{{labels.labelColor}}</td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-trash"
+                        (click)="OnconfirmForDelete($event, labels.id, labels.labelName)"
+                        class="p-button-danger"></button>
+                </td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-info m-2"
+                        (click)="openUpdateModal(labels)"></button>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{labels ? labels.length : 0 }} labels.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast></p-toast>
+<app-update-label></app-update-label>
+<app-add-label></app-add-label>
+<p-confirmPopup></p-confirmPopup>
