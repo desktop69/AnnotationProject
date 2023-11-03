@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WordSelectorComponent } from './word-selector.component';
+import { AdddocumentComponent } from './adddocument.component';
 
-describe('WordSelectorComponent', () => {
-  let component: WordSelectorComponent;
-  let fixture: ComponentFixture<WordSelectorComponent>;
+describe('AdddocumentComponent', () => {
+  let component: AdddocumentComponent;
+  let fixture: ComponentFixture<AdddocumentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WordSelectorComponent ]
+      declarations: [ AdddocumentComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WordSelectorComponent);
+    fixture = TestBed.createComponent(AdddocumentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

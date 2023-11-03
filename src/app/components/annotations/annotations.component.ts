@@ -1,24 +1,38 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Label } from '../models/Label.model';
-import { LabelService } from '../services/label.service';
+import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { Annotation, TDocument } from 'src/app/models/Annotation.model';
+import { Label } from 'src/app/models/Label.model';
+import { AnnotationService } from 'src/app/services/annotation.service';
+import { DocumentService } from 'src/app/services/document.service';
+import { LabelService } from 'src/app/services/label.service';
 
 @Component({
-  selector: 'app-word-selector',
-  templateUrl: './word-selector.component.html',
-  styleUrls: ['./word-selector.component.css']
+  selector: 'app-annotations',
+  templateUrl: './annotations.component.html',
+  styleUrls: ['./annotations.component.css']
 })
-export class WordSelectorComponent implements OnInit {
-
+export class AnnotationsComponent implements OnInit {
   @ViewChild('textToSelect') textToSelect: ElementRef | undefined;
   selectedWord: string = '';
   startPosition: number | undefined;
   endPosition: number | undefined;
   selectedLabel: Label | null = null;
-  labels!: Label[] 
-  constructor(private services: LabelService){}
+  labels!: Label[]
+  document!: TDocument;
+  annotationsList: Annotation[] = [];
+  IdList: any[] = []
+
+  constructor(
+    private services: LabelService,
+    private activatedRoute: ActivatedRoute,
+    private servicesDocument: DocumentService,
+    private serviceannotations: AnnotationService
+  ) { }
+
   selectLabel(label: Label): void {
     this.selectedLabel = label;
-   // console.log("curent label", this.selectedLabel)
+    // console.log("curent label", this.selectedLabel)
   }
   getSelectedText(event: MouseEvent): void {
     const selection = window.getSelection();
@@ -37,6 +51,18 @@ export class WordSelectorComponent implements OnInit {
           this.startPosition = rangeClone.toString().indexOf(selectedText);
           this.endPosition = this.startPosition !== -1 ? this.startPosition + selectedText.length : -1;
           this.applyHighlight(range, selectedText);
+          // collect data
+          if (this.selectedLabel) {
+            const newAnnotation = {
+              start: this.startPosition,
+              end: this.endPosition,
+              label: this.selectedLabel.labelName,
+              text: this.selectedWord
+            }
+            this.annotationsList.push(newAnnotation);
+            console.log("annotation list is recording ", this.annotationsList);
+          }
+
         }
       }
     }
@@ -66,7 +92,21 @@ export class WordSelectorComponent implements OnInit {
 
 
   }
-
+  AddAnnotations() {
+    // Add each annotations
+    let addRequests = this.annotationsList.map(annotation => {
+      return this.serviceannotations.add(annotation);
+    });
+    forkJoin(addRequests).subscribe((addedAnnotations) => {
+      addedAnnotations.forEach((res: any) => {
+        this.IdList.push(res.id);
+      });
+      this.document.annotations = this.IdList;
+      this.servicesDocument.update(this.document.id, this.document).subscribe((data) => {
+        console.log("added data ", data);
+      });
+    });
+  }
 
   GetAllLabels() {
     this.services.getAll().subscribe(res => {
@@ -74,9 +114,14 @@ export class WordSelectorComponent implements OnInit {
       this.labels = res;
     })
   }
-
+  GetDocumentById() {
+    this.servicesDocument.getById(this.activatedRoute.snapshot.params['id']).subscribe(data => {
+      this.document = data;
+    })
+  }
   ngOnInit(): void {
-  this.GetAllLabels()
+    this.GetAllLabels()
+    this.GetDocumentById();
   }
 
 }

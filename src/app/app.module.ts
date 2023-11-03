@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WordSelectorComponent } from './word-selector/word-selector.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LabelComponent } from './components/label/label.component';
 import { UpdateLabelComponent } from './components/update-label/update-label.component';
@@ -23,14 +22,21 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColorPickerModule } from 'primeng/colorpicker';
+import { DocumentComponent } from './components/document/document.component';
+import { AdddocumentComponent } from './components/adddocument/adddocument.component';
+import { UpdatedocumentComponent } from './components/updatedocument/updatedocument.component';
+import { AnnotationsComponent } from './components/annotations/annotations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WordSelectorComponent,
     LabelComponent,
     UpdateLabelComponent,
-    AddLabelComponent
+    AddLabelComponent,
+    DocumentComponent,
+    AdddocumentComponent,
+    UpdatedocumentComponent,
+    AnnotationsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,8 @@ import { ColorPickerModule } from 'primeng/colorpicker';
     ConfirmPopupModule,
     InputTextModule,
     InputTextareaModule,
-    ColorPickerModule
+    ColorPickerModule,
+
 
 
   ],
