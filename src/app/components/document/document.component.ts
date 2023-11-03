@@ -5,6 +5,7 @@ import { AnnotationService } from 'src/app/services/annotation.service';
 import { DocumentService } from 'src/app/services/document.service';
 import { AdddocumentComponent } from '../adddocument/adddocument.component';
 import { UpdatedocumentComponent } from '../updatedocument/updatedocument.component';
+import { DocumentNotificationService } from 'src/app/services/document-notification.service';
 
 @Component({
   selector: 'app-document',
@@ -17,16 +18,14 @@ export class DocumentComponent implements OnInit {
   @ViewChild(AdddocumentComponent) addComponent!: AdddocumentComponent;
   constructor(private services: DocumentService,
     private messageService: MessageService,
-  //  private labelNotificationService: LabelNotificationService,
+    private docNotificationService: DocumentNotificationService,
     private confirmationService: ConfirmationService
   ) {
-    // this.labelNotificationService.articleAdded$.subscribe(() => {
-    //   this.GetAllDocuments();
-    // });
+    this.docNotificationService.documentAdded$.subscribe(() => {
+      this.GetAllDocuments();
+    });
   }
-  ngOnInit(): void {
-    this.GetAllDocuments();
-  }
+
   GetAllDocuments() {
     this.services.getAll().subscribe(res => {
       console.log(res);
@@ -34,11 +33,11 @@ export class DocumentComponent implements OnInit {
     })
   }
   OnDeleteDocument(id: number) {
- 
+
     this.services.delete(id).subscribe(res => {
-        this.GetAllDocuments();
+      this.GetAllDocuments();
     })
-   
+
   }
 
   openUpdateModal(app_obj: TDocument) {
@@ -51,28 +50,30 @@ export class DocumentComponent implements OnInit {
   OnconfirmForDelete(event: Event, id: number, name: string) {
     this.confirmationService.confirm({
       target: event.target!,
-      message: "Are you sure that you want to Delete this Label ?",
+      message: "Are you sure that you want to Delete this Document ?",
       icon: "pi pi-exclamation-triangle",
       accept: () => {
         this.OnDeleteDocument(id);
         this.messageService.add({
           severity: "info",
           summary: "Success",
-          detail: ("You have successfully deleted  " + name),
+          detail: ("You have successfully deleted your document "),
         });
       },
       reject: () => {
         this.messageService.add({
           severity: "error",
           summary: "Rejected",
-          detail: ("You have rejected Deleting " + name),
+          detail: ("You have rejected Deleting your document"),
         });
       }
     });
   }
 
 
-
+  ngOnInit(): void {
+    this.GetAllDocuments();
+  }
 
 
 

@@ -26,7 +26,7 @@ export class AdddocumentComponent implements OnInit {
       this.Service.add(Data).subscribe((response) => {
         // Notify the ArticlesComponent that an article has been added
        // this.labelNotificationService.notifyLabelAdded();
-        this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Category added successfully' });
+        this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Document added successfully' });
         this.closeAllModals()
       });
     }

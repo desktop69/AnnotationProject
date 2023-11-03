@@ -50,7 +50,7 @@ export class UpdateLabelComponent implements OnInit {
   onSubmit(): void {
     if (this.app_obj && this.app_obj.id) {
       this.updateLabel(this.app_obj.id, this.app_obj);
-      this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Category Updated successfully' });
+      this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Label Updated successfully' });
     }
     this.closeAllModals()
   }

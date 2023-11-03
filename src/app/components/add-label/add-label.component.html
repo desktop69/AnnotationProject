@@ -1,6 +1,6 @@
 <!-- crate new dialoge for put request ? -->
 <p-dialog class='custom-close-button' header="Add Label" [(visible)]="displayModal" [modal]="true"
-    [style]="{height :'20vw',width:'30vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+    [style]="{height :'30vw',width:'35vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
     <div class="container" #container>
@@ -13,14 +13,15 @@
 
                         <div class="row">
                             <form [formGroup]="labelForm" (ngSubmit)="onSubmit()">
-                                <div class="col">
+                                <div class="col-md-6">
                                     <label for="labelName">Label Name :</label> <br>
-                                    <input id="labelName" type="text" pInputText formControlName="labelName" />
+                                    <input id="labelName" type="text" pInputText formControlName="labelName" /> <br>
                                 </div>
-                                <div class="col">
-                                    <p-colorPicker for="labelColor" id="labelColor"
+                                <div class="col-md-6">
+                                    <label for="labelName">Color Label :</label> <br>
+                                    <p-colorPicker appendTo="body" for="labelColor" id="labelColor"
                                         formControlName="labelColor"></p-colorPicker>
-                             
+
                                 </div>
                             </form>
                         </div>

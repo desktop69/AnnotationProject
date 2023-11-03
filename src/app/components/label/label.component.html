@@ -22,8 +22,8 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="name">Label Name <p-sortIcon field="title"></p-sortIcon></th>
-                <th pSortableColumn="name">Label color <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="labelName">Label Name <p-sortIcon field="title"></p-sortIcon></th>
+                <th pSortableColumn="labelColor">Label color <p-sortIcon field="title"></p-sortIcon></th>
                 <th pSortableColumn="delete">Delete</th>
                 <th pSortableColumn="update">Update</th>
             </tr>
@@ -31,7 +31,9 @@
         <ng-template pTemplate="body" let-labels>
             <tr>
                 <td>{{labels.labelName}}</td>
-                <td>{{labels.labelColor}}</td>
+                <td [style.backgroundColor]="labels.labelColor">
+                    {{ labels.labelColor }}
+                  </td>
                 <td>
                     <button pButton pRipple type="button" icon="pi pi-trash"
                         (click)="OnconfirmForDelete($event, labels.id, labels.labelName)"

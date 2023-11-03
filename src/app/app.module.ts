@@ -26,7 +26,8 @@ import { DocumentComponent } from './components/document/document.component';
 import { AdddocumentComponent } from './components/adddocument/adddocument.component';
 import { UpdatedocumentComponent } from './components/updatedocument/updatedocument.component';
 import { AnnotationsComponent } from './components/annotations/annotations.component';
-
+import { BlockUIModule } from 'primeng/blockui';
+import {PanelModule} from 'primeng/panel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,8 @@ import { AnnotationsComponent } from './components/annotations/annotations.compo
     InputTextModule,
     InputTextareaModule,
     ColorPickerModule,
+    BlockUIModule,
+    PanelModule
 
 
 

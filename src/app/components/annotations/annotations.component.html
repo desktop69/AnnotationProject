@@ -1,32 +1,30 @@
-<br><br><br>
-
 <div class="container">
-    <div class="label d-flex justify-content-between">
+    <div class="label d-flex justify-content-between mt-3 p-3">
         <div *ngFor="let label of labels">
             <button type="button" class="btn btn-primary" (click)="selectLabel(label)"
                 [style.background]="label.labelColor">{{ label.labelName }}</button>
+
         </div>
     </div>
-    <div>
-        <p-button label="Save Annotations" styleClass="p-button-link" (click)="AddAnnotations()"></p-button>
-    </div>
-    <br><br>
-    <div class="container" *ngIf="document">
-        <p #textToSelect (mouseup)="getSelectedText($event)">
-            {{ document.content}}
-        </p>
-    </div>
-    Selected Word: {{ selectedWord }} <br>
-    Start Position: {{ startPosition }} <br>
-    End Position: {{ endPosition }}
-    <br><br><br>
-    <div class="container">
-        <div class="input-group mb-3">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="folderSelector" webkitdirectory directory multiple>
-                <label class="custom-file-label" for="folderSelector">Choose Folder</label>
-            </div>
-        </div>
-    </div>
+<div>
     
-</div>
+        <div class="container mt-5">
+            <div class="container" *ngIf="document">
+                <p-panel #pnl header="Annotate your text" styleClass="mt-4">
+                    <p class="m-0" #textToSelect (mouseup)="getSelectedText($event)">
+                        {{ document.content}}
+                    </p>
+                </p-panel>
+            </div>
+            <div class="container mt-5">
+                <div class="d-flex flex-row-reverse">
+                    <div class="p-2"> <button pButton pRipple label="Save Annotations" styleClass="pi pi-check"
+                            (click)="AddAnnotations()"></button>
+                    </div>
+                    <div class="p-2"> <button type="button" pButton pRipple icon="pi pi-file" (click)="exportJson()"
+                            class="mr-2"></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>

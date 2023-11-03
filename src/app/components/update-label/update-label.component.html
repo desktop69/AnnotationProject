@@ -1,6 +1,6 @@
 <!-- crate new dialoge for put request ? -->
 <p-dialog class='custom-close-button' header="Update Article" [(visible)]="displayModal" [modal]="true"
-    [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+    [style]="{height :'20vw',width:'35vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
     <div class="container" #container>
@@ -11,12 +11,12 @@
                     <div class="container">
                         <div class="row">
                             <div class="col" *ngIf="app_obj">
-                                <label for="title">Label Name </label><br>          
+                                <label for="labelName">Label Name </label><br>          
                                     <input id="labelName" type="text" [(ngModel)]="app_obj.labelName" pInputText  />
                             </div>
                             <div class="col" *ngIf="app_obj">
-                                <label for="content">Content</label><br>
-                                    <p-colorPicker for="labelColor" [(ngModel)]="app_obj.labelColor" id="labelColor"
+                                <label for="labelColor">Label Color</label><br>
+                                    <p-colorPicker appendTo="body" for="labelColor" [(ngModel)]="app_obj.labelColor" id="labelColor"
                                     ></p-colorPicker>
                             </div>
                         </div>

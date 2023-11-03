@@ -5,6 +5,7 @@ import { Annotation, TDocument } from 'src/app/models/Annotation.model';
 import { Label } from 'src/app/models/Label.model';
 import { AnnotationService } from 'src/app/services/annotation.service';
 import { DocumentService } from 'src/app/services/document.service';
+import { GeneratorService } from 'src/app/services/generator.service';
 import { LabelService } from 'src/app/services/label.service';
 
 @Component({
@@ -23,17 +24,20 @@ export class AnnotationsComponent implements OnInit {
   annotationsList: Annotation[] = [];
   IdList: any[] = []
 
+
   constructor(
     private services: LabelService,
     private activatedRoute: ActivatedRoute,
     private servicesDocument: DocumentService,
-    private serviceannotations: AnnotationService
+    private serviceannotations: AnnotationService,
+    private serviceGenerator: GeneratorService
   ) { }
 
   selectLabel(label: Label): void {
     this.selectedLabel = label;
-    // console.log("curent label", this.selectedLabel)
+
   }
+
   getSelectedText(event: MouseEvent): void {
     const selection = window.getSelection();
     // console.log(selection)
@@ -117,8 +121,15 @@ export class AnnotationsComponent implements OnInit {
   GetDocumentById() {
     this.servicesDocument.getById(this.activatedRoute.snapshot.params['id']).subscribe(data => {
       this.document = data;
+
     })
   }
+  exportJson() {
+    this.serviceGenerator.Get(this.activatedRoute.snapshot.params['id']).subscribe((url) => {
+      console.log("file generaed at ", url)
+    })
+  }
+
   ngOnInit(): void {
     this.GetAllLabels()
     this.GetDocumentById();

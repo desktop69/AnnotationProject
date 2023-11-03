@@ -1,6 +1,6 @@
 <!-- crate new dialoge for put request ? -->
 <p-dialog class='custom-close-button' header="Update Article" [(visible)]="displayModal" [modal]="true"
-    [style]="{height :'30vw',width:'55vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
+    [style]="{height :'35vw',width:'30vw'}" [baseZIndex]="10000" [draggable]="true" [resizable]="true"
     [closable]="false">
     <!--  put ur conetent here   -->
     <div class="container" #container>
@@ -11,8 +11,8 @@
                     <div class="container">
                         <div class="row">
                             <div class="col" *ngIf="app_obj">
-                                <label for="title">Label Name </label><br>          
-                                    <input id="labelName" type="text" [(ngModel)]="app_obj.content" pInputText  />
+                                <label for="title">Document Content :</label><br>          
+                                    <textarea id="labelName" class="mt-3" type="text" [(ngModel)]="app_obj.content" pInputText  ></textarea>
                             </div>
                            
                         </div>

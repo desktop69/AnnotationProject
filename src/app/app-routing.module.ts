@@ -6,7 +6,7 @@ import { AnnotationsComponent } from './components/annotations/annotations.compo
 
 const routes: Routes = [
 { path: "", component: LabelComponent },
-{ path: "doc", component: DocumentComponent },
+{ path: "document", component: DocumentComponent },
 { path: "annotations/:id", component: AnnotationsComponent }
 ];
 
