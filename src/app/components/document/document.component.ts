@@ -16,6 +16,7 @@ export class DocumentComponent implements OnInit {
   documents!: TDocument[];
   @ViewChild(UpdatedocumentComponent) updateComponent!: UpdatedocumentComponent;
   @ViewChild(AdddocumentComponent) addComponent!: AdddocumentComponent;
+  
   constructor(private services: DocumentService,
     private messageService: MessageService,
     private docNotificationService: DocumentNotificationService,

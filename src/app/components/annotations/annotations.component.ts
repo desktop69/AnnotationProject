@@ -76,7 +76,7 @@ export class AnnotationsComponent implements OnInit {
     if (this.selectedLabel) {
       const button = document.createElement('button');
       button.setAttribute('type', 'button');
-      button.classList.add('btn', 'btn-primary'); // Adding Bootstrap classes
+      button.classList.add('btn', 'btn-primary', 'mt-1'); // Adding Bootstrap classes
 
       // Set the background color based on the selected label's color
       button.style.backgroundColor = this.selectedLabel.labelColor;
